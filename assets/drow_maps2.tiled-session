@@ -1,0 +1,11 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "last.imagePath": "C:/Users/warsd/Documents/BattleCity/assets/texture",
+    "map.height": 27,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 26,
+    "tileset.lastUsedFormat": "tsx"
+}
