@@ -4,9 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.mygdx.game.entities.UserTank;
 
 public class Play implements Screen {
 
@@ -14,12 +19,16 @@ public class Play implements Screen {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
+    private UserTank userTank;
+
     @Override
     public void show() {
         map = new TmxMapLoader().load("level1/level1.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
+
+        userTank = new UserTank(new Sprite(new Texture("texture/user_tank.png")), (MapLayers) map.getLayers());
     }
 
     @Override
@@ -29,6 +38,10 @@ public class Play implements Screen {
 
         renderer.setView(camera);
         renderer.render();
+
+        renderer.getBatch().begin();
+        userTank.draw(renderer.getBatch());
+        renderer.getBatch().end();
     }
 
     @Override
@@ -58,5 +71,6 @@ public class Play implements Screen {
     public void dispose() {
         map.dispose();
         renderer.dispose();
+        userTank.getTexture().dispose();
     }
 }
